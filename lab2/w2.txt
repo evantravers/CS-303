@@ -1,0 +1,40 @@
+1. Sequential search in a symbol table with N items requires how many comparisons for a search hit on average?
+
+The answer is n+1/2 will be the average comparisons needed for a search on N items. All the possible answers are all the integers leading up to N. If you add up all the integers leading up to N, (1+2+3...N) and divide it by N, it is N+1/2.
+2. In the worst case, a search in a Binary Search tree with N keys can require how many comparisons?
+
+The worst case possible is that the binary search tree resembles a linked list, all nodes stacked on one side. In this case, the worst case would be O(N), since you might have to go through every single item in order to find the data you are looking for.
+
+More likely, if the binary is normalized, and not as bizarre as the one before described, it'll be N+1/2. (Average case.)
+3. Draw the BST that results when you insert items with keys B I N A R Y T R E E, in that order, into an initially empty tree.
+
+image attached
+4. From the above generated tree, remove the Y and draw the resulting tree.
+
+image attached
+5. Can you guarantee that you can guess the right number between 1 and 1,000,000 (inclusive) within 20 questions? If so, prove it. An example set of questions will do.
+
+Yes. Using a binary search  you can easily find a number between 1 and 1,000,000. You first ask if it's greater than 500,000. You then continue halving the remaining value until you arrive at the proper number. (For this example, I round where applicable. It doesn't change the answer.) Example assuming answer is 1:
+
+1. Are you greater than 500,000?
+2. Are you greater than 250,000?
+3. Are you greater than 125,000?
+4. Are you greater than 62,500?
+5. Are you greater than 31,250?
+6. Are you greater than 15,625?
+7. Are you greater than 7,812?
+8. Are you greater than 3906?
+9. Are you greater than 1953?
+10. Are you greater than 976?
+11. Are you greater than 488?
+12. Are you greater than 244?
+13. Are you greater than 122?
+14. Are you greater than 61?
+15. Are you greater than 30?
+16. Are you greater than 15?
+17. Are you greater than 7?
+18. Are you greater than 3?
+19. Are you greater than 2?
+20. Are you greater than 1? Success!
+
+You will arrive at the number you are looking for in 20 or less comparisons. 1 would be a worst case scenario, therefore the others fall under these bounds.
