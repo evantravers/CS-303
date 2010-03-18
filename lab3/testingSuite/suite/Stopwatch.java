@@ -20,12 +20,15 @@ public class Stopwatch {
         started = false;
         running = false;
     }
+    private long getSystemTime() {
+        return System.nanoTime();
+    }
     /**
      * Starts the stopwatch
      * 
      */
     public void start() {
-        startTime = System.currentTimeMillis();
+        startTime = getSystemTime();
         started = true;
         running = true;
     }
@@ -34,7 +37,7 @@ public class Stopwatch {
      * 
      */
     public void stop() {
-        stopTime = System.currentTimeMillis();
+        stopTime = getSystemTime();
         running = false;
     }
     /**
@@ -50,9 +53,9 @@ public class Stopwatch {
      */
     public double elapsed() {
         if (!running)
-            return ((float)(stopTime - startTime))/1000.;
-        else if (started)
-            return (System.currentTimeMillis()-startTime);
+            return ((float)(stopTime - startTime))/1000000000.;
+        else if (started) 
+            return (getSystemTime()-startTime)/1000000000.;
         return 0;
     }
 }

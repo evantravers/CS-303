@@ -96,16 +96,6 @@ public class Data {
         return values;
     }
 
-    /**
-     * Writes to a file an array of integers, one per line.
-     *
-     * @param fileName
-     *            the file name to write to
-     *
-     * @param values
-     *            int array of values to write, one per line
-     *
-     */
     public void write(String fileName, int[] array) {
         PrintWriter out = null;
         try {
@@ -217,6 +207,16 @@ public class Data {
         }
         return vals;
     }
+    
+    public int[] getRandRange(int start, int end) {
+        Random gen = new Random();
+        int I = gen.nextInt(end*10)+1;
+        int[] vals = new int[end];
+        for (int i=0; i < end; i++) {
+            vals[i] = I++;
+        }
+        return vals;
+    }
 
     /**
      * For producing arrays of query values suitable for testing
@@ -257,6 +257,12 @@ public class Data {
             }
             queries[i] = qVal;
         }
+    }
+    
+    public void printArray(int[] array) {
+    	for (int i=0;i<array.length;i++) {
+    		System.out.print(array[i] + ", ");
+    	}
     }
 
 }
