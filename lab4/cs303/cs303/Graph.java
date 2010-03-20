@@ -348,7 +348,7 @@ public class Graph {
 				neighbors.pop();
 			}
 			else {
-				bfs(neighbors.pop());
+				dfs(neighbors.pop());
 			}
 		}
 		return node;

@@ -20,8 +20,8 @@ public class Demo {
     public static void main(String args[]) throws IOException {
         Data data = new Data();
         Timing t = new Timing();
-		int nums=200;
-		int other=2;
+		int nums=100;
+		int other=3;
 		// evaluating the component as a variable
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(i,other,other);
