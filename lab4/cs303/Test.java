@@ -21,11 +21,16 @@ public class Test {
 		Data data = new Data();
         Timing t = new Timing();
 		// evaluating the component as a variable
-		Graph g = new Graph(2,2,2);
+		Graph g = new Graph(199,2,2);
+		System.out.println(g.graphLength());
+		
+		g = new Graph(2,199,2);
+		System.out.println(g.graphLength());
+		
+		g = new Graph(2,2,199);
+		System.out.println(g.graphLength());
         // g.print();
       	// evaluate();
-		int i = 2;
-		g.dfs(0);
 	}
 	
 	public static Vector<Integer> numComponents(Graph g, int timerCount, Timing t, Boolean timerEnable) {

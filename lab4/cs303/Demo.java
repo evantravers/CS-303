@@ -20,8 +20,8 @@ public class Demo {
     public static void main(String args[]) throws IOException {
         Data data = new Data();
         Timing t = new Timing();
-		int nums=100;
-		int other=3;
+		int nums=200;
+		int other=2;
 		// evaluating the component as a variable
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(i,other,other);
@@ -87,7 +87,7 @@ public class Demo {
 		}
 		for (int i=0;i<g.graphLength();i++) {
 			if (!g.getVisited(i)) {
-				return1.add(g.dfs(i));
+				return1.add(g.dfsNR(i));
 			}
 		}
 		if (timerEnable) {
