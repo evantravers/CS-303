@@ -25,7 +25,7 @@ public class Test {
         // g.print();
       	// evaluate();
 		int i = 2;
-		evaluate(g,i,t,true);
+		g.dfs(0);
 	}
 	
 	public static Vector<Integer> numComponents(Graph g, int timerCount, Timing t, Boolean timerEnable) {

@@ -20,8 +20,8 @@ public class Demo {
     public static void main(String args[]) throws IOException {
         Data data = new Data();
         Timing t = new Timing();
-		int nums=19;
-		int other=3;
+		int nums=200;
+		int other=2;
 		// evaluating the component as a variable
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(i,other,other);
@@ -43,7 +43,7 @@ public class Demo {
 
 		// evaluating the depth as a variable
 		for (int i=1;i<nums;i+=1 ) {
-			Graph g = new Graph(other,i,other);
+			Graph g = new Graph(1,i,other);
 	        // g.print();
 	      	// evaluate();
 			numComponents(g,i,t,true);
@@ -52,7 +52,7 @@ public class Demo {
 		t.outputRuns("dfsdepth"+nums+".csv");
 
 		for (int i=1;i<nums;i+=1 ) {
-			Graph g = new Graph(other,i,other);
+			Graph g = new Graph(1,i,other);
 	        // g.print();
 	      	// evaluate();
 			evaluate(g,i,t,true);
@@ -62,7 +62,7 @@ public class Demo {
 		
 		// evaluating the branching factor as a variable
 		for (int i=1;i<nums;i+=1 ) {
-			Graph g = new Graph(other,other,i);
+			Graph g = new Graph(1,other,i);
 	        // g.print();
 	      	//evaluate();
 			numComponents(g,i,t,true);
@@ -71,7 +71,7 @@ public class Demo {
 		t.outputRuns("dfsbranching"+nums+".csv");
 
 		for (int i=1;i<nums;i+=1 ) {
-			Graph g = new Graph(other,other,i);
+			Graph g = new Graph(1,other,i);
 	        // g.print();
 	      	//evaluate();
 			evaluate(g,i,t,true);
