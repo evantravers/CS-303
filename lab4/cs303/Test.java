@@ -21,13 +21,14 @@ public class Test {
 		Data data = new Data();
         Timing t = new Timing();
 		// evaluating the component as a variable
-		Graph g = new Graph(199,2,2);
+		int other=4;
+		Graph g = new Graph(15,other,other);
 		System.out.println(g.graphLength());
 		
-		g = new Graph(2,199,2);
+		g = new Graph(other,15,other);
 		System.out.println(g.graphLength());
 		
-		g = new Graph(2,2,199);
+		g = new Graph(other,other,15);
 		System.out.println(g.graphLength());
         // g.print();
       	// evaluate();
