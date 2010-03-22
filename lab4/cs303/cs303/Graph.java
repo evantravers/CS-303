@@ -376,4 +376,14 @@ public class Graph {
 		}
 		return neighbors.pop();
 	}
+	
+	public void BFS() {
+		int counter=0;
+		for (int i=0;i<visited.size() ;i++ ) {
+			if (!getVisited(i)) {
+				counter++;
+				System.out.println("nodes of component " + counter + " are: " + bfs(i));
+			}
+		}
+	}
 }

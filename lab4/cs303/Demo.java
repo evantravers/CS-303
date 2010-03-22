@@ -20,8 +20,8 @@ public class Demo {
     public static void main(String args[]) throws IOException {
         Data data = new Data();
         Timing t = new Timing();
-		int nums=18;
-		int other=3;
+		int nums=200;
+		int other=2;
 		// evaluating the component as a variable
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(i,other,other);
@@ -31,7 +31,7 @@ public class Demo {
 			System.out.println("Working on comp dfs #"+i);
 		}  
 		t.outputRuns("dfscomp"+nums+".csv");
-
+		t = new Timing();
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(i,other,other);
 	        // g.print();
@@ -40,7 +40,7 @@ public class Demo {
 			System.out.println("Working on comp bfs #"+i);
 		}
 		t.outputRuns("bfscomp"+nums+".csv");
-
+		t = new Timing();
 		// evaluating the depth as a variable
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(1,i,other);
@@ -50,7 +50,7 @@ public class Demo {
 			System.out.println("Working on depth dfs #"+i);
 		}  
 		t.outputRuns("dfsdepth"+nums+".csv");
-
+		t = new Timing();
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(1,i,other);
 	        // g.print();
@@ -59,7 +59,7 @@ public class Demo {
 			System.out.println("Working on depth bfs #"+i);
 		}
 		t.outputRuns("bfsdepth"+nums+".csv");
-		
+		t = new Timing();
 		// evaluating the branching factor as a variable
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(1,other,i);
@@ -69,7 +69,7 @@ public class Demo {
 			System.out.println("Working on branching dfs #"+i);
 		}  
 		t.outputRuns("dfsbranching"+nums+".csv");
-
+		t = new Timing();
 		for (int i=1;i<nums;i+=1 ) {
 			Graph g = new Graph(1,other,i);
 	        // g.print();
@@ -114,5 +114,11 @@ public class Demo {
 			t.stopRun();
 		}
 		System.out.println(output);
+	}
+	
+	public static void evaluate2(Graph g, Timing t, int timerCount, Boolean timerEnable) {
+		t.startRun(timerCount);
+		g.BFS();
+		t.stopRun();
 	}
 }
