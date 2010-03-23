@@ -16,6 +16,7 @@ import cs303.Graph;
 
 public class Demo {
     public static void main(String args[]) throws IOException {
+		// TODO investigate java's priority queue
         Data data = new Data();
         Timing t = new Timing();
         Graph g = new Graph("graph.off");
