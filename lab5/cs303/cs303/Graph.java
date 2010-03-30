@@ -330,6 +330,7 @@ public class Graph {
             neighbors.add(neighbor);
         }
     }
+
     /**
      * Get neighbors for this node
      *
@@ -343,17 +344,6 @@ public class Graph {
      */
     public void getNeighbors(int node, Stack<Integer> neighbors) {
         neighbors.empty();
-        int degree = adjacency.get(node).size();
-        for(int i=0;i<degree;i++) {
-            int neighbor = adjacency.get(node).get(i);
-            if (neighbor < 0)
-                neighbor = -(neighbor + 1);
-            neighbors.push(neighbor);
-        }
-    }
-
-	public void getNeighborsNR(int node, Stack<Integer> neighbors) {
-        // neighbors.empty();
         int degree = adjacency.get(node).size();
         for(int i=0;i<degree;i++) {
             int neighbor = adjacency.get(node).get(i);
@@ -394,8 +384,12 @@ public class Graph {
             if (nvector.get(i) == nj)
                 return distances.get(ni).get(i);
         }
-        return -1;
+        return Double.POSITIVE_INFINITY;
     }
+
+	public void setDistance(int node, Double distance) {
+		distances.set(node, distance);
+	}
 
     /**
      * Print graph adjacency list
@@ -411,89 +405,4 @@ public class Graph {
             System.out.println();
         }
     }
-
-	
-	public Vector<Integer> bfs() {
-	    	return bfs(0);
-	    }
-
-	    public Vector<Integer> bfs(int node) {
-	    	// you've encountered a wild node!
-			// increment the count
-			Vector<Integer> nodeList = new Vector<Integer>();
-			nodeList.add(node);
-			// mark node as read
-			setVisited(node);
-			// find its friends that you haven't met and repeat
-			// get the neighbors
-			Vector<Integer> neighbors = new Vector<Integer>();
-			getNeighbors(node,neighbors);
-			while (!neighbors.isEmpty()) {
-				if (getVisited(neighbors.firstElement())) {
-					neighbors.remove(0);
-				}
-				else {
-					nodeList.addAll(bfs(neighbors.remove(0)));
-				}
-			}
-			return nodeList;
-	    }
-
-	    public int dfs() {
-	    	return dfs(0);
-	    }
-
-	    public int dfs(int node) {
-			// DFS goes through the graph, marks them as read, and returns a node in that component.
-	    	// you've encountered a wild node!
-			// increment the count
-			// mark node as read
-			setVisited(node);
-			// find its friends that you haven't met and repeat
-			// get the neighbors
-			Stack<Integer> neighbors = new Stack<Integer>();
-			getNeighbors(node,neighbors);
-			while (!neighbors.empty()) {
-				if (getVisited(neighbors.peek())) {
-					neighbors.pop();
-				}
-				else {
-					dfs(neighbors.pop());
-				}
-			}
-			return node;
-	    }
-
-		public int dfsNR() {
-			return dfsNR(0);
-		}
-
-		public int dfsNR(int node) {
-			// get neighbors
-			// push neighbors to stack
-			Stack<Integer> neighbors = new Stack<Integer>();
-			getNeighborsNR(node,neighbors);
-			// while they still exist
-			while (neighbors.size()>1) {
-				if (!getVisited(neighbors.peek())) {
-					setVisited(neighbors.peek());
-					// get top's neighbors, and push them on the stack
-					getNeighborsNR(neighbors.pop(),neighbors);
-				}
-				else {
-					neighbors.pop();
-				}
-			}
-			return neighbors.pop();
-		}
-
-		public void BFS() {
-			int counter=0;
-			for (int i=0;i<visited.size() ;i++ ) {
-				if (!getVisited(i)) {
-					counter++;
-					System.out.println("nodes of component " + counter + " are: " + bfs(i));
-				}
-			}
-		}
 }

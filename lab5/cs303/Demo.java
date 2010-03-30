@@ -20,5 +20,6 @@ public class Demo {
         Data data = new Data();
         Timing t = new Timing();
         Graph g = new Graph("graph.off");
+		System.out.println(g.dijkstra(1,18));
     }
 }
