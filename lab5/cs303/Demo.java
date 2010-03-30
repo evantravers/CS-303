@@ -13,13 +13,14 @@ import cs303.Stopwatch;
 import cs303.Data;
 import cs303.Timing;
 import cs303.Graph;
+import cs303.Node;
 
 public class Demo {
     public static void main(String args[]) throws IOException {
-		// TODO investigate java's priority queue
         Data data = new Data();
         Timing t = new Timing();
         Graph g = new Graph("graph.off");
-		System.out.println(g.dijkstra(1,18));
+		Node n = new Node(0,0.0);
+		// System.out.println(g.dijkstra(0));
     }
 }

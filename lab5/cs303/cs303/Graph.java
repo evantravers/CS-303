@@ -15,6 +15,7 @@ import java.util.Vector;
 import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.PriorityQueue;
 
 /**
  * A class to represent simple undirected graphs
@@ -30,6 +31,7 @@ public class Graph {
     private Vector<Boolean> visited;
     private int maxDegree;
     private Vector<Integer> nvector;
+	private Vector<Double> distance;
 
     private void init() {
         adjacency = new Vector<Vector<Integer>>();
@@ -39,6 +41,7 @@ public class Graph {
         visited = new Vector<Boolean>();
         maxDegree = 0;
         nvector = new Vector<Integer>();
+		distance = new Vector<Double>();
     }
     public Graph() {
         init();
@@ -171,6 +174,7 @@ public class Graph {
         Vector<Integer> list = new Vector<Integer>();
         adjacency.add(list);
         data.add(0);
+		distance.add(0.0);
         visited.add(false);
         return i;
     }
@@ -353,6 +357,17 @@ public class Graph {
         }
     }
 
+	public void getNeighbors(Node node, PriorityQueue<Node> neighbors) {
+        int degree = adjacency.get(node.get()).size();
+        for(int i=0;i<degree;i++) {
+            int neighbor = adjacency.get(node.get()).get(i);
+            if (neighbor < 0)
+                neighbor = -(neighbor + 1);
+			// TODO
+            neighbors.add(new Node(neighbor,getDistance(node.get(), neighbor)+node.weight()));
+        }
+    }
+
     /**
      * Get the 3D point in space where graph node is located.
      *
@@ -387,10 +402,6 @@ public class Graph {
         return Double.POSITIVE_INFINITY;
     }
 
-	public void setDistance(int node, Double distance) {
-		distances.set(node, distance);
-	}
-
     /**
      * Print graph adjacency list
      *
@@ -405,4 +416,30 @@ public class Graph {
             System.out.println();
         }
     }
+
+	public Vector<Double> dijkstra(int start) {
+		// set the distances properly
+		for (int i=0;i<visited.size() ;i++ ) {
+			distance.set(i,Double.POSITIVE_INFINITY);
+		}
+		// set origin to be 0.0
+		distance.set(start,0.0);
+		
+		// last bit of setup
+		PriorityQueue<Node> queue = new PriorityQueue<Node>();
+		Node curr = new Node(start,0.0);
+		queue.add(curr);
+		// the loop
+		// TODO finish the loop
+		while (queue.size()>0) {
+			curr = queue.poll();
+			// add the root's neighbors to the queue
+			getNeighbors(curr,queue);
+			
+			// set it to previous and set as visited
+			Node prev = curr;
+			setVisited(prev.get());
+		}
+		return distance;
+	}
 }
