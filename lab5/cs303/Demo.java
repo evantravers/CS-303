@@ -20,7 +20,6 @@ public class Demo {
         Data data = new Data();
         Timing t = new Timing();
         Graph g = new Graph("graph.off");
-		Node n = new Node(0,0.0);
-		// System.out.println(g.dijkstra(0));
+		System.out.println(g.dijkstra(0));
     }
 }

@@ -359,12 +359,22 @@ public class Graph {
 
 	public void getNeighbors(Node node, PriorityQueue<Node> neighbors) {
         int degree = adjacency.get(node.get()).size();
+		Double newDistance;
         for(int i=0;i<degree;i++) {
             int neighbor = adjacency.get(node.get()).get(i);
             if (neighbor < 0)
                 neighbor = -(neighbor + 1);
-			// TODO
-            neighbors.add(new Node(neighbor,getDistance(node.get(), neighbor)+node.weight()));
+			// TODO fix this
+			if (!getVisited(neighbor)) {
+				newDistance = getDistance(node.get(), neighbor)+node.weight();
+				neighbors.add(new Node(neighbor,newDistance));
+				// if the new distance is better than the old
+				if (distance.get(neighbor)>newDistance) {
+					// replace recorded distance
+					distance.set(neighbor,newDistance);
+				}
+			}
+            
         }
     }
 
@@ -429,17 +439,22 @@ public class Graph {
 		PriorityQueue<Node> queue = new PriorityQueue<Node>();
 		Node curr = new Node(start,0.0);
 		queue.add(curr);
+		
 		// the loop
+		// while the queue !empty
+		// poll the top node
+		// get its unvisited neighbors
+		// if the new distance found is less than recorded distance, then replace it
+		// mark current node as visited
 		// TODO finish the loop
 		while (queue.size()>0) {
+			// consider the one on the top
 			curr = queue.poll();
-			// add the root's neighbors to the queue
+			// get all the neighbors, and if they haven't been visited, add them to the queue
 			getNeighbors(curr,queue);
-			
-			// set it to previous and set as visited
-			Node prev = curr;
-			setVisited(prev.get());
+			setVisited(curr.get());
 		}
+		
 		return distance;
 	}
 }
