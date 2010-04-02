@@ -32,6 +32,7 @@ public class Graph {
     private int maxDegree;
     private Vector<Integer> nvector;
 	private Vector<Double> distance;
+	private int[] answers = {1,18,29,126,212,272,289,336};
 
     private void init() {
         adjacency = new Vector<Vector<Integer>>();
@@ -42,6 +43,7 @@ public class Graph {
         maxDegree = 0;
         nvector = new Vector<Integer>();
 		distance = new Vector<Double>();
+		
     }
     public Graph() {
         init();
@@ -364,7 +366,28 @@ public class Graph {
             int neighbor = adjacency.get(node.get()).get(i);
             if (neighbor < 0)
                 neighbor = -(neighbor + 1);
-			// TODO fix this
+			// CHANGED fix this
+			if (!getVisited(neighbor)) {
+				newDistance = getDistance(node.get(), neighbor)+node.weight();
+				neighbors.add(new Node(neighbor,newDistance));
+				// if the new distance is better than the old
+				if (distance.get(neighbor)>newDistance) {
+					// replace recorded distance
+					distance.set(neighbor,newDistance);
+				}
+			}
+            
+        }
+    }
+
+	public void getNeighborsSpecial(Node node, PriorityQueue<Node> neighbors) {
+        int degree = adjacency.get(node.get()).size();
+		Double newDistance;
+        for(int i=0;i<degree;i++) {
+            int neighbor = adjacency.get(node.get()).get(i);
+            if (neighbor < 0)
+                neighbor = -(neighbor + 1);
+			// CHANGED fix this
 			if (!getVisited(neighbor)) {
 				newDistance = getDistance(node.get(), neighbor)+node.weight();
 				neighbors.add(new Node(neighbor,newDistance));
@@ -427,7 +450,7 @@ public class Graph {
         }
     }
 
-	public Vector<Double> dijkstra(int start) {
+	public Vector<Double> d(int start) {
 		// set the distances properly
 		for (int i=0;i<visited.size() ;i++ ) {
 			distance.set(i,Double.POSITIVE_INFINITY);
@@ -439,22 +462,72 @@ public class Graph {
 		PriorityQueue<Node> queue = new PriorityQueue<Node>();
 		Node curr = new Node(start,0.0);
 		queue.add(curr);
-		
-		// the loop
-		// while the queue !empty
-		// poll the top node
-		// get its unvisited neighbors
-		// if the new distance found is less than recorded distance, then replace it
-		// mark current node as visited
-		// TODO finish the loop
+
+		// CHANGED finish the loop
 		while (queue.size()>0) {
 			// consider the one on the top
 			curr = queue.poll();
-			// get all the neighbors, and if they haven't been visited, add them to the queue
+			// get all the neighbors, and if they haven't been visited, add them to the queue.
+			// this modified get neighbors also replaces the recorded weight, if it is lower.  
 			getNeighbors(curr,queue);
 			setVisited(curr.get());
 		}
 		
 		return distance;
+	}
+	
+	public Vector<Double> d_b(int start) {
+		// set the distances properly
+		for (int i=0;i<visited.size() ;i++ ) {
+			distance.set(i,Double.POSITIVE_INFINITY);
+		}
+		// set origin to be 0.0
+		distance.set(start,0.0);
+		
+		// last bit of setup
+		PriorityQueue<Node> queue = new PriorityQueue<Node>();
+		Node curr = new Node(start,0.0);
+		queue.add(curr);
+
+		// CHANGED finish the loop
+		while (queue.size()>0) {
+			// consider the one on the top
+			curr = queue.poll();
+			// get all the neighbors, and if they haven't been visited, add them to the queue.
+			// this modified get neighbors also replaces the recorded weight, if it is lower.  
+			getNeighborsSpecial(curr,queue);
+			setVisited(curr.get());
+		}
+		
+		return distance;
+	}
+	
+	public Vector<Integer> dd(int start) {
+		Vector<Integer> output = new Vector<Integer>();
+		// create a list of the answers
+		ArrayList<Integer> todo = new ArrayList<Integer>();
+		for (int i=0;i<answers.length ;i++ ) {
+			todo.add(answers[i]);
+		}
+		// call dijkstra on the first answer, looking for only the remaining answers
+		int currentValue=0;
+		while (todo.size()>1) {
+			Vector<Double> results = new Vector<Double>();
+			results = d_b(1);
+			
+			// make a queue of just the results we want
+			PriorityQueue<Node> valuesFound = new PriorityQueue<Node>();
+			for (int i=0;i<todo.size();i++) {
+				// load all the values we are looking for into the queue to be sorted
+				valuesFound.add(new Node(todo.get(i),results.get(todo.get(i))));
+			}
+			// take the shortest path off, repeat
+			// remove the one you just found
+			currentValue=valuesFound.poll().get();
+			todo.remove(todo.indexOf(currentValue));
+			output.add(currentValue);
+		}
+		
+		return output;
 	}
 }

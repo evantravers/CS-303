@@ -20,4 +20,7 @@ public class Node implements Comparable {
 	public int compareTo(Object node) {
 		return weight.compareTo((((Node)node).weight()));
 	}
+	public String toString() {
+		return indice + ": " + weight;
+	}
 }
