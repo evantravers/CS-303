@@ -34,7 +34,7 @@ public class Demo {
 		if (args.length>0) {
 			target = Integer.parseInt(args[0]);
 			Vector<Double> answer = g.d(target);
-			outputStringasCSVspecial("outputfornode"+target+".csv", answer);
+			outputStringasCSVspecial("outputfornode"+target+".csv", answer);
 		}
 		else {
 			System.out.println(g.dd());
