@@ -30,14 +30,16 @@ public class Demo {
         Data data = new Data();
         Timing t = new Timing();
 		int target = 0;
+		Graph g = new Graph("graph.off");
 		if (args.length>0) {
 			target = Integer.parseInt(args[0]);
+			Vector<Double> answer = g.d(target);
+			outputStringasCSVspecial("outputfornode"+target+".csv", answer);
 		}
-        Graph g = new Graph("graph.off");
-		// Vector<Double> answer = g.d(target);
-		System.out.println(g.dd(target));
+		else {
+			System.out.println(g.dd());
+		}
 		//System.out.println(printGraph(answer));
-		// outputStringasCSVspecial("outputfornode"+target+".csv", answer);
     }
 
 	public static String printGraph(Vector<Double> input) {

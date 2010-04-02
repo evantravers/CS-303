@@ -380,27 +380,6 @@ public class Graph {
         }
     }
 
-	public void getNeighborsSpecial(Node node, PriorityQueue<Node> neighbors) {
-        int degree = adjacency.get(node.get()).size();
-		Double newDistance;
-        for(int i=0;i<degree;i++) {
-            int neighbor = adjacency.get(node.get()).get(i);
-            if (neighbor < 0)
-                neighbor = -(neighbor + 1);
-			// CHANGED fix this
-			if (!getVisited(neighbor)) {
-				newDistance = getDistance(node.get(), neighbor)+node.weight();
-				neighbors.add(new Node(neighbor,newDistance));
-				// if the new distance is better than the old
-				if (distance.get(neighbor)>newDistance) {
-					// replace recorded distance
-					distance.set(neighbor,newDistance);
-				}
-			}
-            
-        }
-    }
-
     /**
      * Get the 3D point in space where graph node is located.
      *
@@ -451,6 +430,7 @@ public class Graph {
     }
 
 	public Vector<Double> d(int start) {
+		clearVisited();
 		// set the distances properly
 		for (int i=0;i<visited.size() ;i++ ) {
 			distance.set(i,Double.POSITIVE_INFINITY);
@@ -476,33 +456,7 @@ public class Graph {
 		return distance;
 	}
 	
-	public Vector<Double> d_b(int start) {
-		// set the distances properly
-		for (int i=0;i<visited.size() ;i++ ) {
-			distance.set(i,Double.POSITIVE_INFINITY);
-		}
-		// set origin to be 0.0
-		distance.set(start,0.0);
-		
-		// last bit of setup
-		PriorityQueue<Node> queue = new PriorityQueue<Node>();
-		Node curr = new Node(start,0.0);
-		queue.add(curr);
-
-		// CHANGED finish the loop
-		while (queue.size()>0) {
-			// consider the one on the top
-			curr = queue.poll();
-			// get all the neighbors, and if they haven't been visited, add them to the queue.
-			// this modified get neighbors also replaces the recorded weight, if it is lower.  
-			getNeighborsSpecial(curr,queue);
-			setVisited(curr.get());
-		}
-		
-		return distance;
-	}
-	
-	public Vector<Integer> dd(int start) {
+	public Vector<Integer> dd() {
 		Vector<Integer> output = new Vector<Integer>();
 		// create a list of the answers
 		ArrayList<Integer> todo = new ArrayList<Integer>();
@@ -510,11 +464,11 @@ public class Graph {
 			todo.add(answers[i]);
 		}
 		// call dijkstra on the first answer, looking for only the remaining answers
-		int currentValue=0;
-		while (todo.size()>1) {
+		int currentValue=1;
+		while (todo.size()>0) {
 			Vector<Double> results = new Vector<Double>();
-			results = d_b(1);
-			
+			results = d(currentValue);
+			// System.out.println(results);
 			// make a queue of just the results we want
 			PriorityQueue<Node> valuesFound = new PriorityQueue<Node>();
 			for (int i=0;i<todo.size();i++) {
