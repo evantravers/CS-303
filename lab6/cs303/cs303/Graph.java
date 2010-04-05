@@ -153,6 +153,8 @@ public class Graph {
         }
     }
 
+    public int getDegree(int index){ return adjacency.get(index).size(); }
+
     /**
      * Number of nodes in this graph
      */
@@ -363,7 +365,7 @@ public class Graph {
      *
      */
     public void getVertex(int index, double[] vert) {
-        for(int i=0;i<3;i++)
+        for(int i=0;i<verts.get(index).size();i++)
             vert[i] = verts.get(index).get(i);
     }
 

@@ -13,11 +13,16 @@ import cs303.Stopwatch;
 import cs303.Data;
 import cs303.Timing;
 import cs303.Graph;
+import cs303.Cities;
 
 public class Demo {
     public static void main(String args[]) throws IOException {
         Data data = new Data();
         Timing t = new Timing();
-        Graph g = new Graph("graph.off");
+        Graph g = new Graph();
+        Cities c = new Cities();
+        System.out.println("The distance between "+c.getName(5)+
+                           " and "+c.getName(10)+" is "+
+                           c.getDistance(5,10));
     }
 }
