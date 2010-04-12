@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.Stack;
+import java.util.PriorityQueue;
 import java.util.LinkedList;
 import java.util.Random;
+
 
 /**
  * A class to represent simple undirected graphs
@@ -387,6 +389,16 @@ public class Graph {
         }
         return -1;
     }
+
+	public void prim() {
+		// Vector<Node> nodes = new Vector<Node>();
+		// 		PriorityQueue<Edge> edges = new PriorityQueue<Edge>();
+		// 		prim(nodes, edges);
+	}
+	
+	public void prim(Vector<Node> nodes, PriorityQueue<Edge> edges) {
+		
+	}
 
     /**
      * Print graph adjacency list
