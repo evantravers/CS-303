@@ -24,7 +24,9 @@ public class Demo {
         Timing t = new Timing();
         Graph g = new Graph();
         Cities c = new Cities();
-        // System.out.println("The distance between "+c.getName(5)+
+		// 		System.out.println(c.getName(13)+ " to " + c.getName(9)+c.getDistance(13,9));
+		// 		System.out.println(c.getName(9)+ " to " + c.getName(2)+c.getDistance(9,3));
+        // 		System.out.println("The distance between "+c.getName(5)+
         //                            " and "+c.getName(10)+" is "+
         //                            c.getDistance(5,10));
 		
@@ -53,17 +55,19 @@ public class Demo {
 		}
 
 		// take the one with the lightest weight off the top
+		Edge currentEdge = edges.peek();
+		todo.remove(((Integer)currentEdge.ind(1)));
+		
 		while (!todo.isEmpty()) {
-			Edge currentEdge = edges.poll();
+			currentEdge = edges.poll();
 			// System.out.println("considering " +currentEdge);
-			// if the nodes it connects aren't already used
-			if ((todo.contains(currentEdge.ind(1))||todo.contains(currentEdge.ind(2)))) {
-				if ((!todo.contains(currentEdge.ind(1))&&todo.contains(currentEdge.ind(2)))||(todo.contains(currentEdge.ind(1))&&!todo.contains(currentEdge.ind(2)))) {
-					// remove the new node from the todo, and add the edge to the used pile
-					todo.remove(((Integer)currentEdge.ind(1)));
-					todo.remove(((Integer)currentEdge.ind(2)));
-					result.add(currentEdge);				
-				}
+			
+			// if the beginning of the edge is already visited and the end of the edge hasn't been visited
+			if (!todo.contains(currentEdge.ind(1))&&todo.contains(currentEdge.ind(2))) {
+				// remove the new node from the todo, and add the edge to the used pile
+				todo.remove(((Integer)currentEdge.ind(1)));
+				todo.remove(((Integer)currentEdge.ind(2)));
+				result.add(currentEdge);		
 			}
 		}		
 		return result;
