@@ -14,6 +14,14 @@ public class Edge implements Comparable {
 		return weight;
 	}
 	
+	public int start() {
+		return indices[0];
+	}
+	
+	public int end() {
+		return indices[1];
+	}
+	
 	public int ind(int i) {
 		return indices[i-1];
 	}
