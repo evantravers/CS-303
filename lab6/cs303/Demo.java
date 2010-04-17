@@ -28,9 +28,9 @@ public class Demo {
 		Prim p = new Prim(c);
 		int theNode=0;
 		
-        // 		System.out.println("The distance between "+c.getName(6)+
-        //                                          " and "+c.getName(0)+" is "+
-        //                                          c.getDistance(6,0));
+        		System.out.println("The distance between "+c.getName(6)+
+                                                         " and "+c.getName(0)+" is "+
+                                                         c.getDistance(6,0));
 		if (args.length>0) {
 			theNode = Integer.parseInt(args[0]);
 		}
